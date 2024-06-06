@@ -1,0 +1,38 @@
+@import "../../../styles/colors";
+.div-editBtn {
+    width: 3rem;
+    margin-left: 0.5rem;
+}
+.editBtn {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    @media (min-width: 769px) {
+        cursor: pointer;
+    }
+    @media (max-width: 768px) {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+}
+
+.editBtn:hover {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.336);
+}
+
+.edit-ico-button-img {
+    width: 1.75rem;
+    height: 1.75rem;
+    @media (max-width: 768px) {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}

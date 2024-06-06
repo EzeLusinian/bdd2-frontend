@@ -1,0 +1,26 @@
+@import '../../../styles/colors';
+
+.home-screen{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+
+    .list-proyectos{
+        width: 100%;
+    }
+
+    .item-proyecto{
+        border-style: none;
+        text-align: left;
+        background-color: $lightGray;
+        padding: 1rem;
+        width: 100%;
+        margin-top: 1rem;
+        border-radius: .5rem;
+        cursor: pointer;
+    }
+
+}

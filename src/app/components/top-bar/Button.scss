@@ -1,0 +1,27 @@
+@import '../../../styles/colors';
+
+.btn {
+  padding: .8rem 1.2rem;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  background-color: $principalOscuro;
+  border-radius: .5rem;
+  margin: .5rem;
+  .texto{
+    font-size: 1rem;
+  }
+}
+
+.btn:hover {
+  padding: 1rem 1.5rem;
+  transition: all 0.3s ease-out;
+  background-color: #fff;
+  color: #60a5fa;
+  border-radius: 4px;
+  transition: all 0.3s ease-out;
+  border-radius: 1rem;
+}

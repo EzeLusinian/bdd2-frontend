@@ -1,0 +1,133 @@
+@import "./styles/colors";
+
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Raleway", sans-serif;
+}
+
+.main-design {
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 66%;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}
+
+.main-protected {
+  height: 100vh;
+}
+
+.inputForm {
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 2.5rem;
+  @media (max-width: 768px) {
+    height: 3rem;
+    border-radius: 6px;
+  }
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  padding-left: 10px;
+  transition: 0.2s ease-in-out;
+  margin-top: .5rem;
+}
+
+.input {
+  margin-left: 4px;
+  border-radius: 8px;
+  border: none;
+  width: 85%;
+  height: 100%;
+  font-size: 1rem;
+  padding: 0rem;
+  font-weight: 400;
+}
+
+.disabled-input {
+  background-color: $lightGray;
+}
+.input:focus {
+  outline: none;
+}
+
+.inputForm:focus-within {
+  border: 1.5px solid #2d79f3;
+}
+
+.mt1 {
+  margin-top: 1rem;
+}
+
+.m05 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-logo {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.business-data {
+  margin-top: 0.5rem;
+  width: 100%;
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: $gray;
+  box-shadow: 0px 5px 5px 0px rgba(156, 156, 156, 0.6);
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(156, 156, 156, 0.6);
+  -moz-box-shadow: 0px 5px 5px 0px rgba(156, 156, 156, 0.6);
+
+  .business-data-content {
+    padding: 1rem;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.centrar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
