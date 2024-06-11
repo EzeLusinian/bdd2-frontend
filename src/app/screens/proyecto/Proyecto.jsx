@@ -1,8 +1,10 @@
 import React from 'react'
 
-import { Button, Contenedor, Text, Subtitle, BackButton } from '../../components'
+import { Button, Contenedor, Text, Subtitle, BackButton, Loading } from '../../components'
 
 import { useNavigate } from 'react-router-dom'
+
+import useGetTareas from '../../../services/tarea/useGetTareas'
 
 import './Proyecto.scss'
 
@@ -10,7 +12,11 @@ const Proyecto = () => {
 
 	const navigate = useNavigate()
 
-	const { id, name: nombreProyecto } = { id: '1234', name: 'Proyecto' }
+	// TODO: tomar el id y el nombre del proyecto como query params para no usar context
+	const { name: nombreProyecto, id } = { id: '1234', name: 'Proyecto' }
+
+	// TODO: reemplazar la lista mockeada de tareas por lo que traiga el back
+	const { isLoading, data }  = useGetTareas(id)
 
 	const tareas = [
 		{ id: '1234', name: 'Tarea 1', encargado: 'Ricardo Alfonsin', fechaFinalizacion: new Date(), estado: 'Por hacer', horasEstimadas: 7, descripcion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo inventore unde est eum optio quasi magnam facere quae atque quaerat molestiae et, accusantium doloribus ut, iusto facilis, obcaecati nihil hic' },
@@ -18,6 +24,14 @@ const Proyecto = () => {
 		{ id: '2142', name: 'Tarea 3', encargado: 'Javier Milei', fechaFinalizacion: new Date(), estado: 'En pruebas', horasEstimadas: 9, descripcion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo inventore unde est eum optio quasi magnam facere quae atque quaerat molestiae et, accusantium doloribus ut, iusto facilis, obcaecati nihil hic' },
 		{ id: '4215', name: 'Tarea 4', encargado: 'Pedro Sanchez', fechaFinalizacion: new Date(), estado: 'Finalizado', horasEstimadas: 16, descripcion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo inventore unde est eum optio quasi magnam facere quae atque quaerat molestiae et, accusantium doloribus ut, iusto facilis, obcaecati nihil hic' },
 	]
+
+	if (isLoading) {
+		return (
+			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '200px' }}>
+				<Loading />
+			</div>
+		)
+	}
 
 	return (
 		<Contenedor>

@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { Title, Subtitle, Text, Button, Alert } from '../../components'
+import { Title, Subtitle, Text, Button, Alert, Loading } from '../../components'
 
 import arroba from '../../../assets/auth/mail.png'
 import padlock from '../../../assets/auth/padlock.png'
 
 import useAuth from '../../../hooks/useAuth'
+
+import usePostLogin from '../../../services/auth/usePostLogin'
 
 import './Auth.scss'
 
@@ -28,27 +30,26 @@ const Login = () => {
 	const [alerta, setAlerta] = useState({})
 	const { msg } = alerta
 
-	const [showModal, setShowModal] = useState('')
-
-	// const { isLoading, isError, data, callApi } = usePostLogin()
+	const { isLoading, isError, data, callApi } = usePostLogin()
 
 	const hideAlert = () => setAlerta({
 		msg: '',
 		error: false
 	})
 
-	// useEffect(() => {
-	// 	if (isError) {
-	// 		setAlerta({
-	// 			msg: 'Ocurrió un error, verificá si ingresaste correctamente los datos',
-	// 			error: true
-	// 		});
-	// 	} else if (!isLoading && data) {
-	// 		localStorage.setItem('bdd2-token', data.token)
-	// 		setAuth(data)
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [data, isLoading, isError])
+	useEffect(() => {
+		if (isError) {
+			setAlerta({
+				msg: 'Ocurrió un error, verificá si ingresaste correctamente los datos',
+				error: true
+			});
+		} else if (!isLoading && data) {
+			// TODO: ver si esta bien tomado el token del response del back para el login, lo mismo para la data
+			localStorage.setItem('bdd2-token', data.token)
+			setAuth(data)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data, isLoading, isError])
 
 	const handleLogin = async e => {
 
@@ -66,7 +67,7 @@ const Login = () => {
 
 			setAlerta({})
 
-			// callApi({ email, password })
+			callApi({ email, password })
 
 		} catch (error) {
 			setAlerta({
@@ -77,20 +78,20 @@ const Login = () => {
 
 	}
 
-	// if (isLoading) {
-	// 	return (
-	// 		<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '200px' }}>
-	// 			<Loading />
-	// 		</div>
-	// 	)
-	// }
+	if (isLoading) {
+		return (
+			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '200px' }}>
+				<Loading />
+			</div>
+		)
+	}
 
 	return (
 
 		<form className="form">
 
 			<Title
-				label='Consultoría TPO'
+				label='Consultancy Manager'
 				color='primary'
 				isBold
 				style={{ marginTop: 8, marginBottom: 8 }}

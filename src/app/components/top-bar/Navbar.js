@@ -55,7 +55,7 @@ function Navbar() {
 			<div className='title-desktop-div'>
 
 				<div onClick={() => scrollTop()} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-					<h1 className='title-desktop'>Consultoría TPO</h1>
+					<h1 className='title-desktop'>Consultancy Manager</h1>
 				</div>
 
 				<ul className={click ? 'nav-menu active' : 'nav-menu'}>
@@ -75,7 +75,7 @@ function Navbar() {
 			<nav className={`navbar ${click ? 'open-menu' : ''}`}>
 
 				<h1 className='title-mobile'>
-					Consultoría TPO
+					Consultancy Manager
 				</h1>
 
 				<div className='menu-icon' onClick={handleClick}>

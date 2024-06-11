@@ -8,7 +8,7 @@ import userIco from '../../../assets/auth/user.png'
 import arroba from '../../../assets/auth/mail.png'
 import padlock from '../../../assets/auth/padlock.png'
 
-// import usePostSignUp from '../../../services/auth/usePostSignUp'
+import usePostSignUp from '../../../services/auth/usePostSignUp'
 
 import useAuth from '../../../hooks/useAuth'
 
@@ -20,7 +20,7 @@ const SignUp = () => {
 
 	const navigate = useNavigate()
 
-	// const { data, isLoading, isError, callApi } = usePostSignUp()
+	const { data, isLoading, isError, callApi } = usePostSignUp()
 
 	const { setAuth } = useAuth();
 
@@ -42,25 +42,25 @@ const SignUp = () => {
 	const { name, lastname, email, password, checkPassword } = datos
 	const { msg } = alerta
 
-	// useEffect(() => {
-	// 	if (isError) {
-	// 		console.log(data)
-	// 		if (data?.code === 'USE_OTHER_EMAIL') {
-	// 			setAlerta({
-	// 				msg: 'Este email ya está en uso.',
-	// 				error: true
-	// 			});
-	// 		} else {
-	// 			setAlerta({
-	// 				msg: 'Ocurrió un error, por favor intentá más tarde',
-	// 				error: true
-	// 			});
-	// 		}
+	useEffect(() => {
+		if (isError) {
+			console.log(data)
+			if (data?.code === 'USE_OTHER_EMAIL') {
+				setAlerta({
+					msg: 'Este email ya está en uso.',
+					error: true
+				});
+			} else {
+				setAlerta({
+					msg: 'Ocurrió un error, por favor intentá más tarde',
+					error: true
+				});
+			}
 
-	// 	} else if (!isLoading && data) {
-	// 		setNewUser(data)
-	// 	}
-	// }, [data, isError, isLoading])
+		} else if (!isLoading && data) {
+			setNewUser(data)
+		}
+	}, [data, isError, isLoading])
 
 	const handleSignUp = async e => {
 
@@ -94,12 +94,12 @@ const SignUp = () => {
 
 		try {
 
-			// callApi({
-			// 	name,
-			// 	lastname,
-			// 	email,
-			// 	password,
-			// })
+			callApi({
+				name,
+				lastname,
+				email,
+				password,
+			})
 
 		} catch (error) {
 			setAlerta({
@@ -109,13 +109,13 @@ const SignUp = () => {
 		}
 	}
 
-	// if (isLoading) {
-	// 	return (
-	// 		<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '200px' }}>
-	// 			<Loading />
-	// 		</div>
-	// 	)
-	// }
+	if (isLoading) {
+		return (
+			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '200px' }}>
+				<Loading />
+			</div>
+		)
+	}
 
 	return (
 
@@ -149,7 +149,7 @@ const SignUp = () => {
 			}
 
 			<Title
-				label='Consultoría TPO'
+				label='Consultancy Manager'
 				color='primary'
 				isBold
 				style={{ marginTop: 8, marginBottom: 8 }}

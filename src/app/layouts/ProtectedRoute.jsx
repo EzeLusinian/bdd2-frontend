@@ -26,7 +26,7 @@ const ProtectedRoute = () => {
                         <main>
 
                             <Title
-                                label='Consultoría TPO'
+                                label='Consultancy Manager'
                                 isBold
                                 isCenter
                                 color='primary'
