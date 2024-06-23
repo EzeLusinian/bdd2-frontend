@@ -6,6 +6,10 @@ import usePostTareas from '../../../services/tarea/usePostNuevaTarea'
 
 import { useNavigate } from 'react-router-dom'
 
+
+
+import { Modal } from '../../components';
+
 const NuevaTarea = () => {
 
     const navigate = useNavigate()
@@ -20,11 +24,24 @@ const NuevaTarea = () => {
 
     const { name, horas, fechaFin } = datos
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const initialDatos = {
+        name: '',
+        horas: '',
+        fechaFin: ''
+    };
+
     useEffect(() => {
+        
 		if (isError) {
+            
 			// TODO: manejar error
 		} else if (!isLoading && data) {
-            // TODO: avisar que se creó correctamente
+            setIsModalVisible(true);
+            setDatos(initialDatos)
+
+            // DONE: avisar que se creó correctamente
 		}
 	}, [data, isError, isLoading])
 
@@ -33,7 +50,8 @@ const NuevaTarea = () => {
         e.preventDefault()
 
         if(name.trim() === ''){
-            // TODO: alerta de nombre vacío
+            alert("El nombre de la tarea esta vacío")
+            // DONE: alerta de nombre vacío
         }
 
         callApi({
@@ -91,7 +109,19 @@ const NuevaTarea = () => {
                 />
             </div>
 
-            // TODO: agregar fecha finalizacion tipo input date
+            <div className="inputForm ">
+                <input
+                    className="input"
+                    placeholder="Ingresá la cantidad de horas estimadas"
+                    type="date"
+                    value={fechaFin}
+                    onChange={(e) => {
+                        setDatos({ ...datos, fechaFin: e.target.value })
+                    }}
+                />
+            </div>
+
+            // DONE: agregar fecha finalizacion tipo input date
 
             <div className='centrar mt1'>
                 <Button
@@ -100,6 +130,15 @@ const NuevaTarea = () => {
                     isBold
                 />
             </div>
+
+            <Modal
+                show={isModalVisible}
+                cerrar={() => setIsModalVisible(false)}
+                title="Tarea Creada"
+                clickOff={true}
+            >
+                <p>La tarea se ha creado correctamente.</p>
+            </Modal>
 
         </Contenedor>
 

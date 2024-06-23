@@ -6,6 +6,8 @@ import usePostNuevoProyecto from '../../../services/proyecto/usePostNuevoProyect
 
 import { useNavigate } from 'react-router-dom'
 
+import { Modal } from '../../components'
+
 const NuevoProyecto = () => {
 
     const navigate = useNavigate()
@@ -16,11 +18,21 @@ const NuevoProyecto = () => {
         name: '',
     })
 
+    const initialDatos = {
+        name: ''
+    };
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
     useEffect(() => {
+            
 		if (isError) {
 			// TODO: manejar error
 		} else if (!isLoading && data) {
-            // TODO: avisar que se creó correctamente
+            setIsModalVisible(true)
+            setDatos(initialDatos)
+            
+            // DONE: avisar que se creó correctamente
 		}
 	}, [data, isError, isLoading])
 
@@ -29,7 +41,8 @@ const NuevoProyecto = () => {
         e.preventDefault()
 
         if(name.trim() === ''){
-            // TODO: alerta de nombre vacío
+            // DONE: alerta de nombre vacío
+            alert("El nombre del proyecto esta vacío")
         }
 
         callApi({
@@ -82,6 +95,15 @@ const NuevoProyecto = () => {
                     isBold
                 />
             </div>
+
+            <Modal
+                show={isModalVisible}
+                cerrar={() => setIsModalVisible(false)}
+                title="Proyecto Creado"
+                clickOff={true}
+            >
+                <p>La tarea se ha creado correctamente.</p>
+            </Modal>
 
         </Contenedor>
 
