@@ -71,7 +71,7 @@ const Home = () => {
                 /> */}
             </div>
 
-            //TODO: agregar modal de habilidades
+            {/* //TODO: agregar modal de habilidades */}
         </Contenedor>
     )
 }
