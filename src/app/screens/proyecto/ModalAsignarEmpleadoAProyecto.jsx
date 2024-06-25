@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import closeIco from '../../../assets/modal/close.png';
-import useGetEmpleados from '../../../services/tarea/useGetEmpleados';
+import getEmpleados from '../../../services/tarea/getEmpleados';
 import { Button } from '../../components'
 
 
@@ -11,9 +11,11 @@ export const ModalAsignarEmpleadoAProyecto = ({ show, cerrar, title, clickOff, c
 
     const [empleados, setEmpleados] = useState([])
     const [selectedEmpleado, setSelectedEmpleado] = useState()
-    // useEffect(() => {
-    //      useGetEmpleados(setEmpleados)
-    // }, []);
+
+    useEffect( () => {
+        getEmpleados(setEmpleados)
+        console.log(empleados)
+    }, []);
 
     
     
