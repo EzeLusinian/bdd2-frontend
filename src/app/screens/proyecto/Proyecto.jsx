@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Button, Contenedor, Text, Subtitle, BackButton, Loading } from '../../components'
 
@@ -7,6 +7,11 @@ import { useNavigate } from 'react-router-dom'
 import useGetTareas from '../../../services/tarea/useGetTareas'
 
 import './Proyecto.scss'
+import { ModalComentario } from './ModalComentario'
+import { ModalEstadoTarea } from './ModalEstadoTarea'
+import { ModalVerComentarios } from './ModalVerComentarios'
+import { ModalAsignarEmpleadoAProyecto } from './ModalAsignarEmpleadoAProyecto'
+
 
 const Proyecto = () => {
 
@@ -16,7 +21,31 @@ const Proyecto = () => {
 	const { name: nombreProyecto, id } = { id: '1234', name: 'Proyecto' }
 
 	// TODO: reemplazar la lista mockeada de tareas por lo que traiga el back
+	//el id a pasar tiene que ser el del usuario
 	const { isLoading, data }  = useGetTareas(id)
+	const [isModalComentarioVisible, setIsModalComentarioVisible] = useState(false)
+	const [isModalEstadoTareaVisible, setIsModalEstadoTareaVisible] = useState(false)
+	const [isModalVerComentariosVisible, setIsModalVerComentariosVisible] = useState(false)
+	const [isModalAsignarAProyecto, setIsModalAsignarAProyecto] = useState(false)
+	const [selectedTareaId, setSelectedTareaId] = useState(null);
+	
+	const handleAddCommentClick = (tareaId) => {
+        setSelectedTareaId(tareaId);
+        setIsModalComentarioVisible(true);
+    };
+
+	const handleChangeEstadoClick = (tareaId) => {
+        setSelectedTareaId(tareaId);
+        setIsModalEstadoTareaVisible(true);
+    };
+
+	const handleChangeVerComentarios = (tareaId) => {
+        setSelectedTareaId(tareaId);
+        setIsModalVerComentariosVisible(true);
+    };
+	const handleChangeAsignarAProyecto = (tareaId) => {
+        setIsModalAsignarAProyecto(true);
+    };
 
 	const tareas = [
 		{ id: '1234', name: 'Tarea 1', encargado: 'Ricardo Alfonsin', fechaFinalizacion: new Date(), estado: 'Por hacer', horasEstimadas: 7, descripcion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo inventore unde est eum optio quasi magnam facere quae atque quaerat molestiae et, accusantium doloribus ut, iusto facilis, obcaecati nihil hic' },
@@ -37,11 +66,19 @@ const Proyecto = () => {
 		<Contenedor>
 
 			<div className='proyecto-screen'>
-
-				<BackButton
-					text='Atrás'
-					onClick={() => navigate('/') }
-				/>
+				<div className='botonesProyectoArriba'>
+					<BackButton
+						text='Atrás'
+						onClick={() => navigate('/') }
+					/>
+					<Button
+						label='Asignar'
+						scale={75}
+						isBold
+						onClick={() => setIsModalAsignarAProyecto(true) }
+					/>
+				</div>
+				
 
 				<Subtitle
 					label={`Proyecto: ${nombreProyecto}`}
@@ -53,6 +90,8 @@ const Proyecto = () => {
 					label='Tareas:'
 					isBold
 				/>
+
+				
 
 				{
 					tareas.map(tarea => {
@@ -87,7 +126,7 @@ const Proyecto = () => {
 									style={{ marginTop: 8 }}
 								/>
 								<div className='botonera'>
-									<Button
+									{/* <Button
 										label='Paso atrás'
 										onClick={() => { }}
 										theme='light-red'
@@ -100,6 +139,27 @@ const Proyecto = () => {
 										theme='light-primary'
 										isBold
 										scale={75}
+									/> */}
+									<Button
+										label='Agregar Comentario'
+										//theme=''
+										isBold
+										scale={75}
+										onClick={() => handleAddCommentClick(id)}
+									/>
+									<Button
+										label='Cambiar Estado'
+										//theme=''
+										isBold
+										scale={75}
+										onClick={() => handleChangeEstadoClick(id)}
+									/>
+									<Button
+										label='Ver Comentarios'
+										//theme=''
+										isBold
+										scale={75}
+										onClick={() => handleChangeVerComentarios(id)}
 									/>
 								</div>
 							</div>
@@ -115,7 +175,37 @@ const Proyecto = () => {
 					style={{ marginTop: 16 }}
 				/>
 
+
 			</div>
+
+			<ModalComentario
+                show={isModalComentarioVisible}
+                cerrar={() => setIsModalComentarioVisible(false)}
+                title="Agrega un comentario"
+                clickOff={true}
+                tareaId={selectedTareaId}
+            />
+			<ModalEstadoTarea
+				show={isModalEstadoTareaVisible}
+				cerrar={() => setIsModalEstadoTareaVisible(false)}
+				title="Cambiar estado"
+				clickOff={true}
+				tareaId={selectedTareaId}
+			 />
+
+			 <ModalVerComentarios
+				show={isModalVerComentariosVisible}
+				cerrar={() => setIsModalVerComentariosVisible(false)}
+				title="Comentarios"
+				clickOff={true}
+				tareaId={selectedTareaId}
+			 />
+
+			 <ModalAsignarEmpleadoAProyecto
+			 	show={isModalAsignarAProyecto}
+			 	cerrar={() => setIsModalAsignarAProyecto(false)}
+				title={"Asignar a proyecto"}
+			 />
 
 		</Contenedor>
 	)

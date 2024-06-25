@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Modal } from '../../components';
 
+
 const NuevaTarea = () => {
 
     const navigate = useNavigate()
@@ -25,6 +26,8 @@ const NuevaTarea = () => {
     const { name, horas, fechaFin } = datos
 
     const [isModalVisible, setIsModalVisible] = useState(false);
+
+    
 
     const initialDatos = {
         name: '',
@@ -139,6 +142,8 @@ const NuevaTarea = () => {
             >
                 <p>La tarea se ha creado correctamente.</p>
             </Modal>
+
+            
 
         </Contenedor>
 

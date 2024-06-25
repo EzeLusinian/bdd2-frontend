@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import useAuth from './useAuth';
 
-const REACT_APP_BACKEND = ''
+const REACT_APP_BACKEND = 'https://consultancymanager.azurewebsites.net/api'
 
 const UseApi = (endpoint, config) => {
 
@@ -94,6 +94,7 @@ const UseApi = (endpoint, config) => {
     useEffect(() => {
         if (callOnLoad) callApi()
         // eslint-disable-next-line react-hooks/exhaustive-deps
+        
     }, [])
 
     return {

@@ -1,6 +1,6 @@
 import UseApi from '../../hooks/useApi';
 
-const usePostTareas = () => UseApi(
+const usePostTareas = () => (
     `/tareas`,
     {
         method: 'POST',

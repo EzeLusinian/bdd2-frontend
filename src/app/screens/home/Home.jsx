@@ -63,7 +63,15 @@ const Home = () => {
                     isBold
                     style={{ width: 300, marginTop: 16 }}
                 />
+                <Button
+                    label='Agregar Habilidades a mi perfil'
+                    onClick={() => navigate('/nuevo-proyecto')}
+                    isBold
+                    style={{ width: 300, marginTop: 16 }}
+                />
             </div>
+
+            //TODO: agregar modal de habilidades
         </Contenedor>
     )
 }

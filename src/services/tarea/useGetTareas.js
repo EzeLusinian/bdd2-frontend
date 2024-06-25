@@ -2,7 +2,7 @@ import UseApi from '../../hooks/useApi';
 
 // es el id del proyecto
 const useGetTareas = (id) => UseApi(
-    `/tareas/${id}`,
+    `/proyectos/empleado/${id}`,
     {
         method: 'GET',
         callOnLoad: true
